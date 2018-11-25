@@ -18,6 +18,7 @@ import com.treebo.internetavailabilitychecker.InternetConnectivityListener;
 
 import ir.imanpour.imanpour.R;
 import ir.imanpour.imanpour.core.G;
+import ir.imanpour.imanpour.core.SharedPreferencesHelper;
 
 public class WebActivity extends AppCompatActivity implements InternetConnectivityListener {
 
@@ -26,6 +27,7 @@ public class WebActivity extends AppCompatActivity implements InternetConnectivi
   private InternetAvailabilityChecker internetReciver;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
+    setTheme(SharedPreferencesHelper.getInteger(G.sharedPreferences,G.SharedPreferences_THEME_KEY,R.style.AppThemeLight));
     super.onCreate(savedInstanceState);
     setContentView(R.layout.web_activity);
     if(!isNetworkOnline()){
@@ -43,7 +45,7 @@ public class WebActivity extends AppCompatActivity implements InternetConnectivi
     swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
       @Override
       public void onRefresh() {
-        webview.loadUrl(url);
+        webview.loadUrl(webview.getUrl());
       }
     });
     webview.setWebChromeClient(new WebChromeClient() {
@@ -74,13 +76,15 @@ public class WebActivity extends AppCompatActivity implements InternetConnectivi
       webview.goBack();
       return;
     }
+    finish();
     super.onBackPressed();
   }
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
+    finish();
     startActivity(new Intent(this,ActivityMain.class));
-    return true;
+    return super.onOptionsItemSelected(item);
   }
 
   @Override

@@ -16,7 +16,8 @@ public class ServiceWorkerRssHandler extends Worker {
     VolleySingletone.sendRequestRss(new VolleySingletone.OnReusltRss() {
       @Override
       public void successd() {
-        Log.i("Test","ok");
+        Log.i(
+          "Test","ok");
       }
 
       @Override

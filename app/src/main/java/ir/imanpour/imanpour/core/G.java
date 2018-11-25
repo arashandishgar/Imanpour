@@ -28,6 +28,9 @@ public class G extends Application {
   public static final String WEB_INTENT ="contact";
   public static final int LIKE = 1;
   public static final int UNREAD =2 ;
+  public static final String SharedPreferences_THEME_NOACTIONBAR_KEY ="theme no actionBar" ;
+  public static final String SharedPreferences_THEME_KEY ="theme" ;
+  public static String THEME = "THEME";
   @SuppressLint("StaticFieldLeak")
   public static Context context;
   public static String APP_DIR = Environment.getExternalStorageDirectory().getAbsolutePath() + "/imanpour";
@@ -39,8 +42,7 @@ public class G extends Application {
   public static int gettingKnownCode = 0;
   public static String DATABASE_DIR = APP_DIR + "/rss.sqlite";
   public static SharedPreferences sharedPreferences;
-  public static String firstRun = "first-Run";
-  public static String THEME = "THEME";
+  public static String SharedPreferences_FIRST_RUN_KEY = "first-Run";
   public static AdapterRecyclerView adapter;
   public static String tag = "1";
   public static PeriodicWorkRequest periodicWorkRequest;

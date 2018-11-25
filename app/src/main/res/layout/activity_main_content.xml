@@ -31,7 +31,8 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:srcCompat="@drawable/ic_empty"/>
+      android:src="@drawable/ic_empty"
+      android:contentDescription="TODO"/>
 
     <TextView
       android:id="@+id/textView2"
@@ -53,8 +54,10 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:titleTextColor="@android:color/white"
+    app:subtitleTextColor="@android:color/white"
     android:background="?attr/colorPrimary"
-    app:popupTheme="@style/AppTheme.PopupOverlay"/>
+    />
 
   <android.support.v7.widget.RecyclerView
     android:id="@+id/recyclerView"
@@ -75,7 +78,7 @@
     android:layout_margin="@dimen/fab_margin"
     android:layout_marginEnd="16dp"
     android:layout_marginBottom="16dp"
-    android:src="@drawable/ic_call"
+    android:src="@drawable/telegram"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:useCompatPadding="true"/>

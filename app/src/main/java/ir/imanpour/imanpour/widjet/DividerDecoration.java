@@ -23,7 +23,7 @@ public class DividerDecoration extends RecyclerView.ItemDecoration {
     mPaint = new Paint();
     mPaint.setStyle(Paint.Style.FILL);
     mPaint.setColor(color);
-    this.color=color;
+    this.color = color;
     mHeightDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, heightDp, context.getResources().getDisplayMetrics());
   }
 
@@ -41,9 +41,9 @@ public class DividerDecoration extends RecyclerView.ItemDecoration {
       int position = parent.getChildAdapterPosition(view);
       int viewType = parent.getAdapter().getItemViewType(position);
       mPaint.setColor(color);
-      c.drawRect(view.getLeft(), view.getBottom(), view.getRight()-300, view.getBottom() + mHeightDp, mPaint);
-      mPaint.setColor(Color.WHITE);
-      c.drawRect(view.getRight()-300, view.getBottom(), view.getRight(), view.getBottom() + mHeightDp, mPaint);
+      c.drawRect(view.getLeft(), view.getBottom(), view.getRight() - 300, view.getBottom() + mHeightDp, mPaint);
+      mPaint.setColor(Color.TRANSPARENT);
+      c.drawRect(view.getRight() - 300, view.getBottom(), view.getRight(), view.getBottom() + mHeightDp, mPaint);
     }
   }
 }

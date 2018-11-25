@@ -17,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import ir.imanpour.imanpour.R;
 import ir.imanpour.imanpour.core.AdapterFragmentSlpash;
 import ir.imanpour.imanpour.core.G;
+import ir.imanpour.imanpour.core.SharedPreferencesHelper;
 import ir.imanpour.imanpour.listenner.OnPageChange;
 import ir.imanpour.imanpour.listenner.SmsPermissionListenner;
 import ir.imanpour.imanpour.listenner.StoragePermissionListenner;
@@ -29,8 +30,9 @@ public class ActivityStartup extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    setTheme(SharedPreferencesHelper.getInteger(G.sharedPreferences,G.SharedPreferences_THEME_KEY,R.style.AppThemeLight));
     setContentView(R.layout.activity_startup);
-    if (G.sharedPreferences.getBoolean(G.firstRun, true)) {
+    if (SharedPreferencesHelper.getBoolean(G.sharedPreferences,G.SharedPreferences_FIRST_RUN_KEY,true)) {
       run();
     } else if (ActivityCompat.checkSelfPermission(G.context, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
       ActivityCompat.requestPermissions(ActivityStartup.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 101);
