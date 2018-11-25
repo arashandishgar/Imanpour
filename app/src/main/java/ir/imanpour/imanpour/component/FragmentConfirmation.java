@@ -1,0 +1,72 @@
+package ir.imanpour.imanpour.component;
+
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import ir.imanpour.imanpour.R;
+import ir.imanpour.imanpour.core.G;
+
+import static ir.imanpour.imanpour.component.FragmentGettingKnow.sendSMS;
+
+public class FragmentConfirmation extends Fragment {
+  @Nullable
+  @Override
+  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    View view = inflater.inflate(R.layout.fragmet_coformation, container, false);
+    final EditText edt_code = (EditText) view.findViewById(R.id.edt_Code);
+    view.findViewById(R.id.btn_enter).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        boolean isRight = false;
+        int code = 0;
+        try {
+          code = Integer.parseInt(edt_code.getText().toString());
+        } catch (Exception e) {
+          Toast.makeText(G.context, "کد را اشتباه زدی", Toast.LENGTH_SHORT).show();
+        }
+        switch (code) {
+          case 1: ;case 2: ;case 3: ;case 4: ;case 5: ;case 6: ;
+            isRight = true;
+        }
+        if (isRight) {
+          if (ActivityCompat.checkSelfPermission(G.context, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+            G.storagePermissionListenner.onStoragePermissionRequest();
+          } else {
+            startActivity(new Intent(getActivity(), ActivityMain.class));
+            getActivity().finish();
+          }
+        } else {
+          Toast.makeText(G.context, "کد را اشتباه زدی", Toast.LENGTH_SHORT).show();
+        }
+      }
+    });
+    view.findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        G.onPageChange.onPageChange(1);
+      }
+    });
+    view.findViewById(R.id.btn_resend).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        if (ActivityCompat.checkSelfPermission(G.context, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_DENIED) {
+          G.smsPermissionListenner.onSmsPermissionRequest();
+        } else {
+          sendSMS(""+G.gettingKnownCode);
+        }
+      }
+    });
+    return view;
+  }
+}
