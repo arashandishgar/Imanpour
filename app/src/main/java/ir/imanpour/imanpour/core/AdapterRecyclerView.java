@@ -29,6 +29,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Locale;
 
@@ -70,6 +72,7 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
         sqLiteDatabase.execSQL("UPDATE Rss SET unread=1 where TRIM(link) = '" + item.link + "'");
         Intent intent1 = new Intent(G.context, WebActivity.class);
         intent1.putExtra(G.WEB_INTENT, item.link);
+        intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         G.context.startActivity(intent1);
       }
     });
@@ -154,6 +157,7 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
         arrayList.clear();
         arrayList = DataBaseHelper.convertCoursorToArray(cursor);
         cursor.close();
+        sortBydate(arrayList);
         notifyDataSetChanged();
         break;
       case G.LIKE:
@@ -162,6 +166,7 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
         arrayList = DataBaseHelper.convertCoursorToArray(cursor1);
         Log.i("test","arraylist size k=like"+cursor1.getCount());
         cursor1.close();
+        sortBydate(arrayList);
         notifyDataSetChanged();
         break;
       case G.UNREAD:
@@ -170,9 +175,46 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
         arrayList = DataBaseHelper.convertCoursorToArray(cursor2);
         Log.i("test","arraylist size unread"+cursor2.getCount());
         cursor2.close();
-        notifyDataSetChanged();
+        sortBydate(arrayList);
+          notifyDataSetChanged();
         break;
     }
+  }
+  private void sortBydate(ArrayList<RssParser.Item> items){
+    Collections.sort(items, new Comparator<RssParser.Item>() {
+      @Override
+      public int compare(RssParser.Item o1, RssParser.Item o2) {
+        String[] string1 =o1.pubDate.split(" ");
+        String[] string2 =o2.pubDate.split(" ");
+        Date dateConvert1=null;
+        Date dateConvert2=null;
+        try {
+          dateConvert1 = new SimpleDateFormat("MMM", Locale.ENGLISH).parse(string1[2]);
+          dateConvert2 = new SimpleDateFormat("MMM", Locale.ENGLISH).parse(string2[2]);
+        } catch (ParseException e) {
+          e.printStackTrace();
+        }
+        Calendar calendar1 = Calendar.getInstance();
+        calendar1.setTime(dateConvert1);
+        int month1 = calendar1.get(Calendar.MONTH) + 1;
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.setTime(dateConvert2);
+        int month2 = calendar2.get(Calendar.MONTH) + 1;
+        string1[2] = "" + month1;
+        string2[2] = "" + month2;
+        String  date1=string1[3] + "/" + string1[2] + "/" + string1[1];
+        String  date2=string2[3] + "/" + string2[2] + "/" + string2[1];
+        SimpleDateFormat formatter=new SimpleDateFormat("yyyy/MM/dd");
+
+        try {
+          return formatter.parse(date1).compareTo(formatter.parse(date2));
+        } catch (ParseException e) {
+          e.printStackTrace();
+        }
+        return 0;
+      }
+    });
+    Collections.reverse(arrayList);
   }
   public void reset(){
     arrayList.clear();

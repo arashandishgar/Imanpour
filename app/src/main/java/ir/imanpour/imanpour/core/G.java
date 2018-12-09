@@ -3,6 +3,7 @@ package ir.imanpour.imanpour.core;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Application;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -25,12 +26,13 @@ import ir.imanpour.imanpour.listenner.StoragePermissionListenner;
 
 
 public class G extends Application {
-  public static final String WEB_INTENT ="contact";
+  public static final String WEB_INTENT = "contact";
   public static final int LIKE = 1;
-  public static final int UNREAD =2 ;
-  public static final String SharedPreferences_THEME_NOACTIONBAR_KEY ="theme no actionBar" ;
-  public static final String SharedPreferences_THEME_KEY ="theme" ;
-  public static String THEME = "THEME";
+  public static final int UNREAD = 2;
+  public static final String SharedPreferences_THEME_NOACTIONBAR_KEY = "theme no actionBar";
+  public static final String SharedPreferences_THEME_KEY = "theme";
+  public static final String CAN_CANCEL = "cancel";
+  public static String SharedPreferences_FIRSTLOAD_KEY = "KEY";
   @SuppressLint("StaticFieldLeak")
   public static Context context;
   public static String APP_DIR = Environment.getExternalStorageDirectory().getAbsolutePath() + "/imanpour";
@@ -46,11 +48,15 @@ public class G extends Application {
   public static AdapterRecyclerView adapter;
   public static String tag = "1";
   public static PeriodicWorkRequest periodicWorkRequest;
+  public static NotificationManager notificationManager;
+  public static int NOTIFY_ID = 1;
+  ;
 
   @Override
   public void onCreate() {
     super.onCreate();
     context = getApplicationContext();
+    notificationManager = (NotificationManager) G.context.getSystemService(Context.NOTIFICATION_SERVICE);
     handler = new Handler();
     sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     SharedPreferences.Editor editor = G.sharedPreferences.edit();

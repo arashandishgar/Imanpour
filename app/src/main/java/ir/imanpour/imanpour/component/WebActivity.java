@@ -83,7 +83,6 @@ public class WebActivity extends AppCompatActivity implements InternetConnectivi
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     finish();
-    startActivity(new Intent(this,ActivityMain.class));
     return super.onOptionsItemSelected(item);
   }
 
@@ -114,6 +113,5 @@ public class WebActivity extends AppCompatActivity implements InternetConnectivi
       return false;
     }
     return status;
-
   }
 }

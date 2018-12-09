@@ -28,31 +28,55 @@ public class FragmentGettingKnow extends Fragment {
       @Override
       public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId){
-          case R.id.rdt_1:
-            onFinsh(1);
+          case R.id.rdt_basij:
+            onFinsh(820);
             ;break;
-          case R.id.rdt_2:
-            onFinsh(2);
+          case R.id.rdt_mahdaviyat:
+            onFinsh(193);
             ;break;
-          case R.id.rdt_3:
-            onFinsh(3);
+          case R.id.rdt_studierendenvertretung:
+            onFinsh(281);
             ;break;
-          case R.id.rdt_4:
-            onFinsh(4);
+          case R.id.rdt_statistik:
+            onFinsh(123);
             ;break;
-          case R.id.rdt_5:
-            onFinsh(5);
+          case R.id.rdt_electric:
+            onFinsh(423);
             ;break;
-          case R.id.rdt_6:
-            onFinsh(6);
+          case R.id.rdt_mechanic:
+            onFinsh(248);
             ;break;
-          case R.id.rdt_7:
-            onFinsh(7);
+          case R.id.rdt_health:
+            onFinsh(712);
             ;break;
-          case R.id.rdt_8:
-            onFinsh(8);
+          case R.id.rdt_math:
+            onFinsh(401);
+            break;
+          case R.id.rdt_physic:
+            onFinsh(382);
+            break;
+          case R.id.rdt_computer:
+            onFinsh(125);
+            break;
+          case R.id.rdt_sinceComputer:
+            onFinsh(802);
+            break;
+          case R.id.rdt_enviroment:
+            onFinsh(221);
+            break;
+          case R.id.rdt_theather:
+            onFinsh(100);
             ;break;
-          case R.id.rdt_9:
+          case R.id.rdt_rain:
+            onFinsh(124);
+            ;break;
+          case R.id.rdt_music:
+            onFinsh(870);
+            ;break;
+          case R.id.rdt_officer:
+            onFinsh(667);
+            ;break;
+          case R.id.rdt_other:
             if (ActivityCompat.checkSelfPermission(G.context, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
               G.storagePermissionListenner.onStoragePermissionRequest();
             } else {
@@ -77,7 +101,7 @@ public class FragmentGettingKnow extends Fragment {
   public static void sendSMS( Object msg) {
     SmsManager smsManager = SmsManager.getDefault();
     Toast.makeText(G.context,"send sms",Toast.LENGTH_SHORT).show();
-    //smsManager.sendTextMessage("50002060757500", null, ""+msg, null, null);
+    smsManager.sendTextMessage("500054107756", null, ""+msg, null, null);
   }
 
 }

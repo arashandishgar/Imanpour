@@ -96,16 +96,29 @@ public class RssParser extends DefaultHandler {
 
   @Override
   public void endDocument() throws SAXException {
+    finish(0);
+  }
+  private void finish(int b){
+    boolean canSendNotification =false;
     try {
-      for (Item item : items) {
+      for (int i=b;i<items.size();i++) {
+        Item item=items.get(i);
         G.sqLiteDatabase.execSQL("INSERT INTO RSS " +
-          "(title,description,link,category,pubDate,guid,enclosure,creator,like,unread)" +
+          "(title,description,link,category,pubDate,guid,enclosure,creator,like,unread,notify)" +
           " VALUES ('" + item.title + "','" + item.description + "','" + item.link + "','" + item.category + "','" + item.pubDate + "','" + item.guid + "','"
-          + item.enclosure + "','" + item.creator + "','" + 0 + "','"+ + 0 + "')");
+          + item.enclosure + "','" + item.creator + "','" + 0 + "','"+ + 0 + "','"+ + 0 + "')");
+        canSendNotification =true;
       }
     } catch (Exception e) {
+      b++;
+      if(b<items.size()) {
+        finish(b);
+      }
       e.printStackTrace();
     }finally {
+      if(canSendNotification){
+        VolleySingletone.sendNotification();
+      }
       if(onResult!=null) {
         onResult.onSuccessful();
       }
