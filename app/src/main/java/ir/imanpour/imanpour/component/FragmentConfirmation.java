@@ -36,7 +36,7 @@ public class FragmentConfirmation extends Fragment {
           Toast.makeText(G.context, "کد را اشتباه زدی", Toast.LENGTH_SHORT).show();
         }
         switch (code) {
-          case 723: ;case 872: ;case 718: ;case 429: ;case 423: ;case 493: ;case 293: ;case 983: ;case 463: ;case 433: ;case 401: ;case 340: ;case 280: ;case 728: ;case 871: ;case 861: ;
+          case 723: ;case 872: ;case 718: ;case 429: ;case 423: ;case 493: ;case 293: ;case 983: ;case 463: ;case 433: ;case 401: ;case 340: ;case 280: ;case 728: ;case 871: ;case 861: case 230: case 281: case 294: case 183: case 126: case 400: case 193: ;
             isRight = true;
         }
         if (isRight) {

@@ -31,6 +31,9 @@ public class FragmentGettingKnow extends Fragment {
           case R.id.rdt_basij:
             onFinsh(820);
             ;break;
+          case R.id.rdt_angomanEslami:
+            onFinsh(422);
+            ;break;
           case R.id.rdt_mahdaviyat:
             onFinsh(193);
             ;break;
@@ -75,6 +78,24 @@ public class FragmentGettingKnow extends Fragment {
             ;break;
           case R.id.rdt_officer:
             onFinsh(667);
+            ;break;
+          case R.id.rdt_poem:
+            onFinsh(370);
+            ;break;
+          case R.id.rdt_movie:
+            onFinsh(326);
+            ;break;
+          case R.id.rdt_onBorderEnginner:
+            onFinsh(183);
+            ;break;
+          case R.id.rdt_civilEngeenier:
+            onFinsh(181);
+            ;break;
+          case R.id.rdt_water:
+            onFinsh(206);
+            ;break;
+          case R.id.rdt_vefagh:
+            onFinsh(211);
             ;break;
           case R.id.rdt_other:
             if (ActivityCompat.checkSelfPermission(G.context, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {

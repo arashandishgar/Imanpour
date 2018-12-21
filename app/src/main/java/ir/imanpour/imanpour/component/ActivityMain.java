@@ -164,6 +164,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
   public void onBackPressed() {
     DrawerLayout drawer = findViewById(R.id.drawer_layout);
     if (!onPageHome) {
+      constraintLayout.setVisibility(View.INVISIBLE);
       G.adapter.reset();
       G.adapter.setNewlist();
       onPageHome = true;

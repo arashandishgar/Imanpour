@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
+  android:layout_height="match_parent"
+  android:gravity="right"
+  android:orientation="vertical">
 
   <TextView
     android:id="@+id/textView3"
@@ -19,224 +21,326 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent"/>
 
-  <RadioGroup
-    android:id="@+id/radioGroup"
-    android:layout_width="0dp"
-    android:layout_height="0dp"
-    android:layout_gravity="start"
+  <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
-    android:layoutDirection="rtl"
-    android:orientation="vertical"
-    android:textAlignment="textStart"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="8dp"
+    android:fillViewport="true"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.0"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/textView3">
+    app:layout_constraintTop_toBottomOf="@+id/textView3"
+    app:layout_constraintVertical_bias="0.0">
 
-    <RadioButton
-      android:id="@+id/rdt_basij"
+
+    <RadioGroup
+      android:id="@+id/radioGroup"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
+      android:layout_height="match_parent"
       android:layout_gravity="start"
-      android:layout_margin="4dp"
-      android:layout_weight="1"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
       android:layoutDirection="rtl"
-      android:text="بسیج دانشجویی"
+      android:orientation="vertical"
       android:textAlignment="textStart"
-      android:textSize="14sp"/>
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/textView3">
 
-    <RadioButton
-      android:id="@+id/rdt_mahdaviyat"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_gravity="start"
-      android:layout_margin="4dp"
-      android:layout_weight="1"
-      android:layoutDirection="rtl"
-      android:text="کانون مهدویت"
-      android:textAlignment="textStart"
-      android:textSize="14sp"/>
+      <RadioButton
+        android:id="@+id/rdt_basij"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="4dp"
+        android:layoutDirection="rtl"
+        android:text="بسیج دانشجویی"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
 
-    <RadioButton
-      android:id="@+id/rdt_studierendenvertretung"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_gravity="start"
-      android:layout_margin="4dp"
-      android:layout_weight="1"
-      android:layoutDirection="rtl"
-      android:text="شورای صنفی"
-      android:textAlignment="textStart"
-      android:textSize="14sp"/>
+      <RadioButton
+        android:id="@+id/rdt_angomanEslami"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="4dp"
+        android:layoutDirection="rtl"
+        android:text="انجمن اسلامی"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
 
-    <RadioButton
-      android:id="@+id/rdt_computer"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_gravity="start"
-      android:layout_margin="4dp"
-      android:layout_weight="1"
-      android:layoutDirection="rtl"
-      android:text="انجمن کامپیوتر"
-      android:textAlignment="textStart"
-      android:textSize="14sp"/>
+      <RadioButton
+        android:id="@+id/rdt_mahdaviyat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="4dp"
+        android:layoutDirection="rtl"
+        android:text="کانون مهدویت"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
 
-    <RadioButton
-      android:id="@+id/rdt_statistik"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_gravity="start"
-      android:layout_margin="4dp"
-      android:layout_weight="1"
-      android:layoutDirection="rtl"
-      android:text="انجمن آمار"
-      android:textAlignment="textStart"
-      android:textSize="14sp"/>
+      <RadioButton
+        android:id="@+id/rdt_studierendenvertretung"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="4dp"
+        android:layoutDirection="rtl"
+        android:text="شورای صنفی"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
 
-    <RadioButton
-      android:id="@+id/rdt_electric"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_gravity="start"
-      android:layout_margin="4dp"
-      android:layout_weight="1"
-      android:layoutDirection="rtl"
-      android:text="انجمن برق"
-      android:textAlignment="textStart"
-      android:textSize="14sp"/>
+      <RadioButton
+        android:id="@+id/rdt_vefagh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="4dp"
+        android:layoutDirection="rtl"
+        android:text="انجمن وفاق توسعه"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
 
-    <RadioButton
-      android:id="@+id/rdt_mechanic"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_gravity="start"
-      android:layout_margin="4dp"
-      android:layout_weight="1"
-      android:layoutDirection="rtl"
-      android:text="انجمن مکانیک"
-      android:textAlignment="textStart"
-      android:textSize="14sp"/>
+      <RadioButton
+        android:id="@+id/rdt_computer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="4dp"
+        android:layoutDirection="rtl"
+        android:text="انجمن کامپیوتر"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
 
-    <RadioButton
-      android:id="@+id/rdt_math"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_gravity="start"
-      android:layout_margin="4dp"
-      android:layout_weight="1"
-      android:layoutDirection="rtl"
-      android:text="انجمن ریاضی"
-      android:textAlignment="textStart"
-      android:textSize="14sp"/>
+      <RadioButton
+        android:id="@+id/rdt_onBorderEnginner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="4dp"
+        android:layoutDirection="rtl"
+        android:text="مهندسی بدون مرز"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
 
-    <RadioButton
-      android:id="@+id/rdt_physic"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_gravity="start"
-      android:layout_margin="4dp"
-      android:layout_weight="1"
-      android:layoutDirection="rtl"
-      android:text="انجمن فیریک"
-      android:textAlignment="textStart"
-      android:textSize="14sp"/>
+      <RadioButton
+        android:id="@+id/rdt_statistik"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="4dp"
+        android:layoutDirection="rtl"
+        android:text="انجمن آمار"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
 
-    <RadioButton
-      android:id="@+id/rdt_sinceComputer"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_gravity="start"
-      android:layout_margin="4dp"
-      android:layout_weight="1"
-      android:layoutDirection="rtl"
-      android:text="انجمن علوم کامپیوتر"
-      android:textAlignment="textStart"
-      android:textSize="14sp"/>
+      <RadioButton
+        android:id="@+id/rdt_electric"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="4dp"
+        android:layoutDirection="rtl"
+        android:text="انجمن برق"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
 
-    <RadioButton
-      android:id="@+id/rdt_enviroment"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_gravity="start"
-      android:layout_margin="4dp"
-      android:layout_weight="1"
-      android:layoutDirection="rtl"
-      android:text="انجمن منابع طبیعی"
-      android:textAlignment="textStart"
-      android:textSize="14sp"/>
+      <RadioButton
+        android:id="@+id/rdt_mechanic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="4dp"
+        android:layoutDirection="rtl"
+        android:text="انجمن مکانیک"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
 
-    <RadioButton
-      android:id="@+id/rdt_health"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_gravity="start"
-      android:layout_margin="4dp"
-      android:layout_weight="1"
-      android:layoutDirection="rtl"
-      android:text="کانون سلامت"
-      android:textAlignment="textStart"
-      android:textSize="14sp"/>
+      <RadioButton
+        android:id="@+id/rdt_civilEngeenier"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="4dp"
+        android:layoutDirection="rtl"
+        android:text="انجمن عمران"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
 
-    <RadioButton
-      android:id="@+id/rdt_theather"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_gravity="start"
-      android:layout_margin="4dp"
-      android:layout_weight="1"
-      android:layoutDirection="rtl"
-      android:text="کانون تئاتر"
-      android:textAlignment="textStart"
-      android:textSize="14sp"/>
+      <RadioButton
+        android:id="@+id/rdt_math"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="4dp"
+        android:layoutDirection="rtl"
+        android:text="انجمن ریاضی"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
 
-    <RadioButton
-      android:id="@+id/rdt_rain"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_gravity="start"
-      android:layout_margin="4dp"
-      android:layout_weight="1"
-      android:layoutDirection="rtl"
-      android:text="کانون باران"
-      android:textAlignment="textStart"
-      android:textSize="14sp"/>
+      <RadioButton
+        android:id="@+id/rdt_physic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="4dp"
+        android:layoutDirection="rtl"
+        android:text="انجمن فیریک"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
 
-    <RadioButton
-      android:id="@+id/rdt_music"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_gravity="start"
-      android:layout_margin="4dp"
-      android:layout_weight="1"
-      android:layoutDirection="rtl"
-      android:text="کانون موسیقی"
-      android:textAlignment="textStart"
-      android:textSize="14sp"/>
+      <RadioButton
+        android:id="@+id/rdt_sinceComputer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="4dp"
+        android:layoutDirection="rtl"
+        android:text="انجمن علوم کامپیوتر"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
 
-    <RadioButton
-      android:id="@+id/rdt_officer"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_gravity="start"
-      android:layout_margin="4dp"
-      android:layout_weight="1"
-      android:layoutDirection="rtl"
-      android:text="کارکنان دانشگاه"
-      android:textAlignment="textStart"
-      android:textSize="14sp"/>
+      <RadioButton
+        android:id="@+id/rdt_enviroment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="4dp"
+        android:layoutDirection="rtl"
+        android:text="انجمن منابع طبیعی"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
 
-    <RadioButton
-      android:id="@+id/rdt_other"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_gravity="start"
-      android:layout_margin="4dp"
-      android:layout_weight="1"
-      android:layoutDirection="rtl"
-      android:text="موارد دیگر"
-      android:textAlignment="textStart"
-      android:textSize="14sp"/>
+      <RadioButton
+        android:id="@+id/rdt_water"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="4dp"
+        android:layoutDirection="rtl"
+        android:text="انجمن آب"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
 
-  </RadioGroup>
-</android.support.constraint.ConstraintLayout>
+      <RadioButton
+        android:id="@+id/rdt_health"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="4dp"
+        android:layoutDirection="rtl"
+        android:text="کانون سلامت"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+      <RadioButton
+        android:id="@+id/rdt_theather"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="4dp"
+        android:layoutDirection="rtl"
+        android:text="کانون تئاتر"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+      <RadioButton
+        android:id="@+id/rdt_rain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="4dp"
+        android:layoutDirection="rtl"
+        android:text="کانون باران"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+      <RadioButton
+        android:id="@+id/rdt_music"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="4dp"
+        android:layoutDirection="rtl"
+        android:text="کانون موسیقی"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+      <RadioButton
+        android:id="@+id/rdt_poem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="4dp"
+        android:layoutDirection="rtl"
+        android:text="کانون شعرادب"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+      <RadioButton
+        android:id="@+id/rdt_movie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="4dp"
+        android:layoutDirection="rtl"
+        android:text="کانون فیلم و عکس"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+      <RadioButton
+        android:id="@+id/rdt_officer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="4dp"
+        android:layoutDirection="rtl"
+        android:text="کارکنان دانشگاه"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+      <RadioButton
+        android:id="@+id/rdt_other"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="4dp"
+        android:layoutDirection="rtl"
+        android:text="موارد دیگر"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    </RadioGroup>
+  </ScrollView>
+
+</LinearLayout>
