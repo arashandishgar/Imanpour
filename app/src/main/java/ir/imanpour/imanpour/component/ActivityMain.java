@@ -179,7 +179,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
 
   @SuppressWarnings("StatementWithEmptyBody")
   @Override
-  public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+  public boolean onNavigationItemSelected(@NonNull MenuItem item){
     // Handle navigation view item clicks here.
     int id = item.getItemId();
    /* onPageHome = id == R.id.home;

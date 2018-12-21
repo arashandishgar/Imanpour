@@ -9,19 +9,24 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.toolbox.ImageRequest;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -37,6 +42,7 @@ import java.util.Locale;
 import ir.imanpour.imanpour.R;
 import ir.imanpour.imanpour.component.WebActivity;
 
+import static ir.imanpour.imanpour.core.G.context;
 import static ir.imanpour.imanpour.core.G.sqLiteDatabase;
 
 public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerView.ViewHolder> {
@@ -131,6 +137,54 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
         cursor.close();
       }
     });
+    holder.root.setOnLongClickListener(new View.OnLongClickListener() {
+      @Override
+      public boolean onLongClick(final View v) {
+        PopupMenu popupMenu = new PopupMenu(context, holder.root);
+        popupMenu.inflate(R.menu.pop_up);
+        popupMenu.show();
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+          @Override
+          public boolean onMenuItemClick(MenuItem item1) {
+            try {
+              if (new File(file).exists()) {
+                //Tools.log("SHARE");
+                Uri uri = uri(file);
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, item.title + "\n" + item.creator + "\n" + item.link);
+                shareIntent.putExtra(Intent.EXTRA_TITLE, item.title);
+                shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+                shareIntent.setType("image/jpeg");
+                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                v.getContext().startActivity(Intent.createChooser(shareIntent, "send"));
+              }
+            } catch (NullPointerException e) {
+              Intent shareIntent = new Intent();
+              shareIntent.setAction(Intent.ACTION_SEND);
+              shareIntent.putExtra(Intent.EXTRA_TEXT, item.title + "\n" + item.creator + "\n" + item.link);
+              shareIntent.putExtra(Intent.EXTRA_TITLE, item.title);
+              //cbeck it
+              shareIntent.setType("text/plain");
+              shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+              shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+              v.getContext().startActivity(Intent.createChooser(shareIntent, "send"));
+            }
+            return true;
+          }
+        });
+        return true;
+      }
+    });
+  }
+
+  private Uri uri(String path) {
+    Bitmap bitmap = BitmapFactory.decodeFile(path);
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+    String s = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, "Title", null);
+    return Uri.parse(s);
   }
 
   public Bitmap getCroppedBitmap(Bitmap bitmap) {
@@ -151,7 +205,7 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
   }
 
   public void setNewlist(int mode) {
-    switch (mode){
+    switch (mode) {
       case 0:
         @SuppressLint("Recycle") Cursor cursor = sqLiteDatabase.rawQuery("select * from RSS", null);
         arrayList.clear();
@@ -161,10 +215,10 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
         notifyDataSetChanged();
         break;
       case G.LIKE:
-        @SuppressLint("Recycle")Cursor cursor1 = G.sqLiteDatabase.rawQuery("select * from Rss where like=1", null);
+        @SuppressLint("Recycle") Cursor cursor1 = G.sqLiteDatabase.rawQuery("select * from Rss where like=1", null);
         arrayList.clear();
         arrayList = DataBaseHelper.convertCoursorToArray(cursor1);
-        Log.i("test","arraylist size k=like"+cursor1.getCount());
+        Log.i("test", "arraylist size k=like" + cursor1.getCount());
         cursor1.close();
         sortBydate(arrayList);
         notifyDataSetChanged();
@@ -173,21 +227,22 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
         @SuppressLint("Recycle") Cursor cursor2 = G.sqLiteDatabase.rawQuery("select * from Rss where unread=0", null);
         arrayList.clear();
         arrayList = DataBaseHelper.convertCoursorToArray(cursor2);
-        Log.i("test","arraylist size unread"+cursor2.getCount());
+        Log.i("test", "arraylist size unread" + cursor2.getCount());
         cursor2.close();
         sortBydate(arrayList);
-          notifyDataSetChanged();
+        notifyDataSetChanged();
         break;
     }
   }
-  private void sortBydate(ArrayList<RssParser.Item> items){
+
+  private void sortBydate(ArrayList<RssParser.Item> items) {
     Collections.sort(items, new Comparator<RssParser.Item>() {
       @Override
       public int compare(RssParser.Item o1, RssParser.Item o2) {
-        String[] string1 =o1.pubDate.split(" ");
-        String[] string2 =o2.pubDate.split(" ");
-        Date dateConvert1=null;
-        Date dateConvert2=null;
+        String[] string1 = o1.pubDate.split(" ");
+        String[] string2 = o2.pubDate.split(" ");
+        Date dateConvert1 = null;
+        Date dateConvert2 = null;
         try {
           dateConvert1 = new SimpleDateFormat("MMM", Locale.ENGLISH).parse(string1[2]);
           dateConvert2 = new SimpleDateFormat("MMM", Locale.ENGLISH).parse(string2[2]);
@@ -202,9 +257,9 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
         int month2 = calendar2.get(Calendar.MONTH) + 1;
         string1[2] = "" + month1;
         string2[2] = "" + month2;
-        String  date1=string1[3] + "/" + string1[2] + "/" + string1[1];
-        String  date2=string2[3] + "/" + string2[2] + "/" + string2[1];
-        SimpleDateFormat formatter=new SimpleDateFormat("yyyy/MM/dd");
+        String date1 = string1[3] + "/" + string1[2] + "/" + string1[1];
+        String date2 = string2[3] + "/" + string2[2] + "/" + string2[1];
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
 
         try {
           return formatter.parse(date1).compareTo(formatter.parse(date2));
@@ -216,10 +271,12 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
     });
     Collections.reverse(arrayList);
   }
-  public void reset(){
+
+  public void reset() {
     arrayList.clear();
     notifyDataSetChanged();
   }
+
   @Override
   public int getItemCount() {
     return arrayList.size();
