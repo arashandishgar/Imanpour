@@ -51,7 +51,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
   ConstraintLayout constraintLayout;
   private boolean onUnreadState = false;
   private boolean onPageHome = false;
-
+  NavigationView navigationView;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -90,7 +90,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     drawer.addDrawerListener(toggle);
     toggle.syncState();
 
-    NavigationView navigationView = findViewById(R.id.nav_view);
+    navigationView = findViewById(R.id.nav_view);
     navigationView.setNavigationItemSelectedListener(this);
     recyclerView = findViewById(R.id.recyclerView);
     recyclerView.setLayoutManager(new LinearLayoutManager(ActivityMain.this));
@@ -168,11 +168,16 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
       G.adapter.reset();
       G.adapter.setNewlist();
       onPageHome = true;
+      navigationView.getMenu().findItem(R.id.like).setChecked(false);
+      navigationView.getMenu().findItem(R.id.unread).setChecked(false);
+      navigationView.getMenu().findItem(R.id.home).setChecked(true);
+      if (drawer.isDrawerOpen(GravityCompat.START)) {
+        drawer.closeDrawer(GravityCompat.START);
+      }
       return;
-    }
-    if (drawer.isDrawerOpen(GravityCompat.START)) {
+    }  if (drawer.isDrawerOpen(GravityCompat.START)) {
       drawer.closeDrawer(GravityCompat.START);
-    } else {
+    }else {
       super.onBackPressed();
     }
   }
